@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Страница книги</title>
+</head>
+<body>
+<br/>
+<br/>
+<h1 align="center" th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></h1>
+<br/>
+
+<table th:if="${person_name != null}" align="center">
+  <tbody>
+  <tr>
+    <td style="font:24px Times New Roman">Книга сейчас у:</td>
+    <td style="font:24px Times New Roman" th:text="${person_name}"></td>
+    <td>
+      <form th:method="PATCH" th:action="@{/books/{id}/disappoint(id=${book.getId()})}">
+        <input type="submit" value="Освободить книгу" style="font:24px Times New Roman">
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<form th:method="PATCH" th:action="@{/books/{id}/appoint(id=${book.getId()})}" th:unless="${person_name != null}" >
+<table align="center">
+  <tbody>
+  <tr>
+    <td style="font:24px Times New Roman">Эта книга свободна.</td>
+    <td style="font:24px Times New Roman">Кому назначить ее?</td>
+  </tr>
+  <tr>
+    <td align="left" style="font:24px Times New Roman">Выберите человека:</td>
+    <td align="center">
+      <select th:object="${person}" th:field="*{id}" id="person" style="font:24px Times New Roman">
+        <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getName()}" style="font:24px Times New Roman"></option>
+      </select>
+    </td>
+    <td>
+      <input type="submit" value="Назначить" style="font:24px Times New Roman"/>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</form>
+
+<hr/>
+
+<table align="center">
+  <thead>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+  <td>
+    <form th:method="GET" th:action="@{/books/{id}/edit(id=${book.getId()})}">
+      <input type="submit" value="Редактировать книгу">
+    </form>
+  </td>
+  <td>
+    <form th:method="DELETE" th:action="@{/books/{id}(id=${book.getId()})}">
+      <input type="submit" value="Удалить книгу">
+    </form>
+  </td>
+  <td>
+    <form th:method="GET" th:action="@{/books}">
+      <input type="submit" value="Перейти к списку книг">
+    </form>
+  </td>
+  </tbody>
+</table>
+
+</body>
+</html>

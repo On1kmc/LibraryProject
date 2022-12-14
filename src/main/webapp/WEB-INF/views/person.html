@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Страница пользователя</title>
+</head>
+<body>
+<br/>
+<br/>
+<h1 align="center" th:text="${person.getName() + ', ' + person.getYear()}"></h1>
+<br/>
+<h2 align="center">Полученные книги:</h2>
+<table align="center" border="1" width="600" th:unless="${books.isEmpty()}">
+
+  <thead>
+  <tr>
+    <th>Название книги</th>
+    <th>Автор</th>
+    <th>Год издания</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="book : ${books}">
+    <td align="center">
+      <a th:href="@{/books/{id}(id=${book.getId()})}" th:text="${book.getName()}">user</a>
+    </td>
+    <td align="center" th:text="${book.getAuthor()}"></td>
+    <td align="center" th:text="${book.getYear()}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<h3 align="center" th:if="${books.isEmpty}">Читатель еще не получил ни одной книги!</h3>
+
+<hr/>
+
+<table align="center">
+  <thead>
+  <th></th>
+  <th></th>
+  </thead>
+  <tbody>
+  <td>
+    <form th:method="GET" th:action="@{/{id}/edit(id=${person.getId()})}">
+    <input type="submit" value="Редактировать пользователя">
+    </form>
+  </td>
+  <td>
+    <form th:method="DELETE" th:action="@{/{id}(id=${person.getId()})}">
+      <input type="submit" value="Удалить пользователя">
+    </form>
+  </td>
+  <td>
+    <form th:method="GET" th:action="@{/}">
+      <input type="submit" value="Перейти к списку читателей">
+    </form>
+  </td>
+  </tbody>
+</table>
+
+</body>
+</html>

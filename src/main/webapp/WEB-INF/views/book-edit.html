@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Изменить книгу</title>
+</head>
+<body>
+
+<h1 align="center">Введите информацию о книге:</h1>
+
+<form th:method="PATCH" th:action="@{/books/{id}/edit(id=${book.getId()})}" th:object="${book}">
+  <table align="center">
+    <tbody>
+    <tr>
+      <td>
+        <label for="name">Название книги</label>
+      </td>
+      <td>
+        <input type="text" th:field="*{name}" id="name">
+      </td>
+      <td>
+        <p th:if="${#fields.hasErrors('name')}" style="color:red" th:errors="*{name}">ERROR</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="author">Автор:</label>
+      </td>
+      <td>
+        <input type="text" th:field="*{author}" id="author">
+      </td>
+      <td>
+        <p th:if="${#fields.hasErrors('author')}" style="color:red" th:errors="*{author}">ERROR</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label for="year">Год издания</label>
+      </td>
+      <td>
+        <input type="text" th:field="*{year}" id="year">
+      </td>
+      <td>
+        <p th:if="${#fields.hasErrors('year')}" style="color:red" th:errors="*{year}">ERROR</p>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <input type="submit" value="Принять"/>
+      </td>
+      <td>
+        <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
+      </td>
+    </tr>
+
+
+    </tbody>
+  </table>
+</form>
+
+</body>
+</html>

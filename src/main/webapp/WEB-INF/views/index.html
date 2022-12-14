@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Library</title>
+</head>
+<body>
+<br/>
+<br/>
+<h1 align="center">Список читателей</h1>
+
+
+<table align="center" border="2" width="600">
+    <thead>
+    <tr>
+        <th>Имя</th>
+        <th>Год рождения</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${people}">
+        <td align="center">
+            <a th:href="@{/{id}(id=${person.getId()})}" th:text="${person.getName()}">user</a>
+        </td>
+        <td th:text="${person.getYear()}" align="center"></td>
+    </tr>
+    </tbody>
+</table>
+
+<hr/>
+<br>
+<table align="center" width="300">
+    <tbody>
+    <tr>
+        <td align="center">
+            <form th:method="GET" th:action="@{/new}">
+                <input type="submit" value="Добавить читателя"/>
+            </form>
+        </td>
+        <td align="center">
+            <form th:method="GET" th:action="@{/books}">
+                <input type="submit" value="Перейти к списку книг"/>
+            </form>
+        </td>
+
+    </tr>
+    </tbody>
+
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать пользователя</title>
+</head>
+<body>
+
+<h1 align="center">Обновить информацию о читателе</h1>
+
+<form th:method="PATCH" th:action="@{/{id}(id=${person.getId()})}" th:object="${person}">
+    <table align="center">
+        <tbody>
+        <tr>
+            <td>
+                <label for="name">Имя читателя:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{name}" id="name">
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('name')}" style="color:red" th:errors="*{name}">ERROR</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="year">Год рождения:</label>
+            </td>
+            <td>
+                <input type="text" th:field="*{year}" id="year">
+            </td>
+            <td>
+                <p th:if="${#fields.hasErrors('year')}" style="color:red" th:errors="*{year}">ERROR</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Принять изменения"/>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" onclick="window.history.back();">Cancel</button>
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</form>
+
+</body>
+</html>
